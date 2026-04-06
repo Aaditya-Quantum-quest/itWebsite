@@ -1,0 +1,78 @@
+import React, { useEffect, useState, useRef } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import Cursor from './components/ui/Cursor';
+import Preloader from './components/ui/Preloader';
+
+// Pages
+import Home from './pages/Home';
+import Services from './pages/Services';
+import Portfolio from './pages/Portfolio';
+import GetQuote from './pages/GetQuote';
+import BookConsultation from './pages/BookConsultation';
+import About from './pages/About';
+import Contact from './pages/Contact';
+
+gsap.registerPlugin(ScrollTrigger);
+
+function App() {
+  const location = useLocation();
+  const [theme, setTheme] = useState('dark');
+  const mainRef = useRef(null);
+
+  // Listen to theme changes
+  useEffect(() => {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  // Scroll to top and animate page transitions on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (mainRef.current) {
+      gsap.fromTo(
+        mainRef.current, 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.4, delay: 0.1 }
+      );
+    }
+  }, [location.pathname]);
+
+  return (
+    <>
+      <Preloader />
+      <Cursor />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      
+      {/* Scroll Progress Bar */}
+      <div className="scroll-progress-bar fixed top-0 left-0 h-[2px] bg-neonPrimary z-[100] w-full scale-x-0 origin-left" />
+
+      <main className="min-h-screen pt-[72px]" ref={mainRef}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/quote" element={<GetQuote />} />
+          <Route path="/book" element={<BookConsultation />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </>
+  );
+}
+
+export default App;

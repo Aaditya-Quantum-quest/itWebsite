@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Syne:wght@400..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bgPrimary: #0A0A0F;
+  --color-bgSecondary: #0D1117;
+  --color-surfaceCard: #111827;
+  --color-surfaceElevated: #1a2035;
+  --color-neonPrimary: #00D4FF;
+  --color-neonSecondary: #7B61FF;
+  --color-neonTertiary: #00FF88;
+  --color-textPrimary: #F0F6FF;
+  --color-textSecondary: #8892A4;
+  --color-textMuted: #4B5563;
+  --color-error: #FF4C6A;
+  --color-success: #00FF88;
+
+  --font-hero: "Syne", sans-serif;
+  --font-heading: "DM Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --background-image-gradient-cyan-purple: linear-gradient(135deg, #00D4FF, #7B61FF);
+  --background-image-gradient-purple-green: linear-gradient(135deg, #7B61FF, #00FF88);
+
+  --shadow-glow-primary: 0 0 30px rgba(0, 212, 255, 0.15);
+  --shadow-btn-glow: 0 0 40px rgba(0, 212, 255, 0.4);
+
+  --drop-shadow-glow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+@layer base {
+  body {
+    @apply bg-bgPrimary text-textPrimary font-body overflow-x-hidden;
+    /* Custom Scrollbar */
+    scrollbar-color: #00D4FF #0A0A0F;
+    scrollbar-width: thin;
+    cursor: none;
+    /* For custom cursor */
+  }
+
+  body::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: #0A0A0F;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: #00D4FF;
+    border-radius: 10px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+  }
+
+  .glass-nav {
+    background: rgba(10, 10, 15, 0.9);
+    backdrop-filter: blur(20px);
+  }
+
+  .border-glow {
+    border-color: rgba(0, 212, 255, 0.4);
+  }
+}
+
+/* Light mode overrides */
+.light body {
+  @apply bg-[#F8FAFC] text-[#0F172A];
+  transition: background 0.4s, color 0.4s;
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 212, 255, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.light .glass-nav {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Base custom animations & utilities that might not fit Tailwind cleanly */
+.noise-texture {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.hero-headline {
+  /* For GSAP SplitText if needed */
+  perspective: 400px;
+}

@@ -1,0 +1,12 @@
+import mongoose from 'mongoose';
+
+const contactSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  subject: String,
+  message: { type: String, required: true, maxLength: 1000 },
+  ipAddress: String,
+  read: { type: Boolean, default: false }
+}, { timestamps: true });
+
+export default mongoose.model('Contact', contactSchema);
