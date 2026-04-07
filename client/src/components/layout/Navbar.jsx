@@ -118,38 +118,40 @@ export default function Navbar({ theme, toggleTheme }) {
       </header>
 
       {/* Mobile Overlay */}
-      <div className="mobile-overlay fixed inset-0 z-[60] bg-bgSecondary/95 backdrop-blur-xl translate-x-full pr-4 flex flex-col justify-center items-center noise-texture shadow-2xl">
-        <button 
-          className="absolute top-6 right-6 p-2 pointer-events-auto text-textPrimary"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          <X className="w-8 h-8" />
-        </button>
-        
-        <nav className="flex flex-col items-center gap-4 sm:gap-6 pointer-events-auto relative z-20">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              to={link.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className="mobile-nav-link text-2xl sm:text-3xl font-heading font-bold"
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8 w-full max-w-xs mobile-nav-link">
-            <Link to="/quote" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl border border-neonPrimary text-neonPrimary text-sm">
-              Get a Quote
-            </Link>
-            <Link to="/book" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl bg-gradient-cyan-purple text-white text-sm">
-              Book Consultation
-            </Link>
-            <button onClick={() => { toggleTheme(); setMobileMenuOpen(false); }} className="w-full mt-2 flex justify-center py-2 text-textMuted text-sm">
-              Toggle {theme === 'dark' ? 'Light' : 'Dark'} Mode
-            </button>
-          </div>
-        </nav>
-      </div>
+      {mobileMenuOpen && (
+        <div className="mobile-overlay fixed inset-0 z-[60] bg-bgSecondary/95 backdrop-blur-xl translate-x-full pr-4 flex flex-col justify-center items-center noise-texture shadow-2xl">
+          <button 
+            className="absolute top-6 right-6 p-2 pointer-events-auto text-textPrimary"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          
+          <nav className="flex flex-col items-center gap-4 sm:gap-6 pointer-events-auto relative z-20">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.name} 
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-link text-2xl sm:text-3xl font-heading font-bold"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <div className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8 w-full max-w-xs mobile-nav-link">
+              <Link to="/quote" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl border border-neonPrimary text-neonPrimary text-sm">
+                Get a Quote
+              </Link>
+              <Link to="/book" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl bg-gradient-cyan-purple text-white text-sm">
+                Book Consultation
+              </Link>
+              <button onClick={() => { toggleTheme(); setMobileMenuOpen(false); }} className="w-full mt-2 flex justify-center py-2 text-textMuted text-sm">
+                Toggle {theme === 'dark' ? 'Light' : 'Dark'} Mode
+              </button>
+            </div>
+          </nav>
+        </div>
+      )}
     </>
   );
 }
