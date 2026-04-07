@@ -39,6 +39,17 @@
     /* For custom cursor */
   }
 
+  /* Disable custom cursor on mobile and tablet */
+  @media (max-width: 1024px), (hover: none) {
+    body {
+      cursor: auto !important;
+    }
+    
+    .custom-cursor {
+      display: none !important;
+    }
+  }
+
   body::-webkit-scrollbar {
     width: 6px;
   }
@@ -93,6 +104,110 @@
 
 .light .glass-nav {
   background: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile-first responsive utilities */
+@layer utilities {
+  .container-responsive {
+    @apply px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16;
+  }
+  
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl;
+  }
+  
+  .spacing-responsive {
+    @apply p-4 sm:p-6 lg:p-8 xl:p-12;
+  }
+  
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .btn-responsive {
+    @apply px-4 sm:px-6 py-2 text-sm;
+  }
+  
+  .card-responsive {
+    @apply p-4 sm:p-6 rounded-xl lg:rounded-2xl;
+  }
+}
+
+/* Responsive font sizes */
+@layer base {
+  html {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 475px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  @media (min-width: 1536px) {
+    html {
+      font-size: 18px;
+    }
+  }
+}
+
+/* Touch-friendly targets */
+@media (hover: none) and (pointer: coarse) {
+  button, a, input, textarea, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improved mobile scrolling */
+@media (max-width: 768px) {
+  html, body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* Reduce motion for better performance */
+  .reduce-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  .glass {
+    backdrop-filter: blur(8px);
+  }
+  
+  .glass-nav {
+    backdrop-filter: blur(12px);
+  }
+  
+  /* Smaller shadows for mobile */
+  .shadow-glow-primary {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+  }
+  
+  .shadow-btn-glow {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+  }
+}
+
+/* Landscape mobile adjustments */
+@media (max-width: 896px) and (orientation: landscape) {
+  .py-responsive {
+    @apply py-8 sm:py-12;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
 }
 
 /* Base custom animations & utilities that might not fit Tailwind cleanly */

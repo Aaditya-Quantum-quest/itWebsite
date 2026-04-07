@@ -16,6 +16,7 @@ import GetQuote from './pages/GetQuote';
 import BookConsultation from './pages/BookConsultation';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +24,34 @@ function App() {
   const location = useLocation();
   const [theme, setTheme] = useState('dark');
   const mainRef = useRef(null);
+  const progressBarRef = useRef(null);
+
+  // Scroll progress bar
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollProgress = (scrollTop / scrollHeight) * 100;
+      
+      if (progressBarRef.current) {
+        gsap.to(progressBarRef.current, {
+          scaleX: scrollProgress / 100,
+          duration: 0.05,
+          ease: "power2.out"
+        });
+      }
+    };
+
+    ScrollTrigger.create({
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: updateProgress
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   // Listen to theme changes
   useEffect(() => {
@@ -56,7 +85,10 @@ function App() {
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       
       {/* Scroll Progress Bar */}
-      <div className="scroll-progress-bar fixed top-0 left-0 h-[2px] bg-neonPrimary z-[100] w-full scale-x-0 origin-left" />
+      <div 
+        ref={progressBarRef}
+        className="scroll-progress-bar fixed top-0 left-0 h-[2px] bg-neonPrimary z-[100] w-full scale-x-0 origin-left" 
+      />
 
       <main className="min-h-screen pt-[72px]" ref={mainRef}>
         <Routes location={location}>
@@ -67,6 +99,7 @@ function App() {
           <Route path="/book" element={<BookConsultation />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

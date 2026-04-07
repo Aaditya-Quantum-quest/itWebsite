@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Hero from '../components/sections/Hero';
 import ServicesOverview from '../components/sections/ServicesOverview';
 import WhyChooseUs from '../components/sections/WhyChooseUs';
@@ -7,15 +7,29 @@ import TechStack from '../components/sections/TechStack';
 import Process from '../components/sections/Process';
 import StatsCounter from '../components/sections/StatsCounter';
 import CTABanner from '../components/sections/CTABanner';
-import { initScrollAnimations } from '../lib/gsap';
+// import { initScrollAnimations } from '../lib/gsap';
 
 export default function Home() {
+  const isInitialized = useRef(false);
+
   useEffect(() => {
-    // Only init after a small delay to ensure DOM is rendered
-    const timer = setTimeout(() => {
-      initScrollAnimations();
-    }, 100);
-    return () => clearTimeout(timer);
+    // Prevent multiple initializations
+    if (isInitialized.current) return;
+    
+    try {
+      // Temporarily disabled animations to prevent crashes
+      console.log('Home component mounted - animations disabled temporarily');
+      isInitialized.current = true;
+      
+      return () => {
+        // Clean up ScrollTriggers on unmount
+        if (typeof window !== 'undefined' && window.gsap) {
+          window.gsap.ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        }
+      };
+    } catch (error) {
+      console.warn('Home component error:', error);
+    }
   }, []);
 
   return (

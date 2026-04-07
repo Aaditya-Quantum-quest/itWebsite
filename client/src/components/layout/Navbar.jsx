@@ -71,20 +71,20 @@ export default function Navbar({ theme, toggleTheme }) {
         ref={navbarRef}
         className="fixed top-0 w-full z-50 h-16 md:h-[72px] flex items-center transition-colors duration-300 glass-nav border-b border-transparent"
       >
-        <div className="container mx-auto px-4 md:px-8 lg:px-16 flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 flex items-center justify-between">
           
           <Link to="/" className="flex items-center gap-2 group">
             <Hexagon className="w-6 h-6 text-neonPrimary group-hover:rotate-90 transition-transform duration-500" />
-            <span className="font-hero font-bold text-xl md:text-2xl tracking-wide">NexaForge</span>
+            <span className="font-hero font-bold text-lg sm:text-xl md:text-2xl tracking-wide">NexaForge</span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
                 to={link.path}
-                className={`text-sm lg:text-base font-medium relative overflow-hidden group ${location.pathname === link.path ? 'text-neonPrimary' : 'text-textPrimary hover:text-textSecondary'}`}
+                className={`text-sm lg:text-base xl:text-base font-medium relative overflow-hidden group ${location.pathname === link.path ? 'text-neonPrimary' : 'text-textPrimary hover:text-textSecondary'}`}
               >
                 {link.name}
                 <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-neonPrimary transform ${location.pathname === link.path ? 'translate-x-0' : '-translate-x-[101%] group-hover:translate-x-0'} transition-transform duration-300 ease-out`} />
@@ -92,7 +92,7 @@ export default function Navbar({ theme, toggleTheme }) {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
             <button 
               onClick={() => {
                 toggleTheme();
@@ -102,16 +102,16 @@ export default function Navbar({ theme, toggleTheme }) {
             >
               {theme === 'dark' ? <Sun className="w-5 h-5 theme-icon text-yellow-400" /> : <Moon className="w-5 h-5 theme-icon text-blue-600" />}
             </button>
-            <Link to="/quote" className="px-5 py-2 rounded-full text-sm font-semibold border-1.5 border-neonPrimary text-neonPrimary hover:bg-neonPrimary/10 transition-colors drop-shadow-glow">
+            <Link to="/quote" className="px-3 sm:px-4 py-2 rounded-full text-sm font-semibold border-1.5 border-neonPrimary text-neonPrimary hover:bg-neonPrimary/10 transition-colors drop-shadow-glow">
               Get a Quote
             </Link>
-            <Link to="/book" className="px-5 py-2 rounded-full text-sm font-semibold bg-gradient-cyan-purple text-textPrimary hover:shadow-btn-glow hover:scale-105 transition-all">
+            <Link to="/book" className="px-3 sm:px-4 py-2 rounded-full text-sm font-semibold bg-gradient-cyan-purple text-textPrimary hover:shadow-btn-glow hover:scale-105 transition-all">
               Book Consultation
             </Link>
           </div>
 
           {/* Mobile Toggle */}
-          <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(true)}>
+          <button className="lg:hidden p-2" onClick={() => setMobileMenuOpen(true)}>
             <Menu className="w-6 h-6" />
           </button>
         </div>
@@ -126,25 +126,25 @@ export default function Navbar({ theme, toggleTheme }) {
           <X className="w-8 h-8" />
         </button>
         
-        <nav className="flex flex-col items-center gap-6 pointer-events-auto relative z-20">
+        <nav className="flex flex-col items-center gap-4 sm:gap-6 pointer-events-auto relative z-20">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.path}
               onClick={() => setMobileMenuOpen(false)}
-              className="mobile-nav-link text-3xl font-heading font-bold"
+              className="mobile-nav-link text-2xl sm:text-3xl font-heading font-bold"
             >
               {link.name}
             </Link>
           ))}
-          <div className="flex flex-col gap-4 mt-8 w-full max-w-xs mobile-nav-link">
-            <Link to="/quote" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-6 py-3 rounded-xl border border-neonPrimary text-neonPrimary">
+          <div className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8 w-full max-w-xs mobile-nav-link">
+            <Link to="/quote" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl border border-neonPrimary text-neonPrimary text-sm">
               Get a Quote
             </Link>
-            <Link to="/book" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-6 py-3 rounded-xl bg-gradient-cyan-purple text-white">
+            <Link to="/book" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl bg-gradient-cyan-purple text-white text-sm">
               Book Consultation
             </Link>
-            <button onClick={() => { toggleTheme(); setMobileMenuOpen(false); }} className="w-full mt-2 flex justify-center py-2 text-textMuted">
+            <button onClick={() => { toggleTheme(); setMobileMenuOpen(false); }} className="w-full mt-2 flex justify-center py-2 text-textMuted text-sm">
               Toggle {theme === 'dark' ? 'Light' : 'Dark'} Mode
             </button>
           </div>

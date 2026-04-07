@@ -46,25 +46,25 @@ export default function ServicesOverview() {
   ];
 
   return (
-    <section className="py-24 lg:py-32 bg-bgPrimary relative">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+    <section className="py-16 sm:py-24 lg:py-32 bg-bgPrimary relative">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16">
         <SectionHeader 
           label="Our Services" 
           title="End-to-End Digital Engineering" 
           subtitle="We provide a full spectrum of software development services to help you build, scale, and optimize your digital products."
         />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {services.map((svc, i) => (
             <Card key={i} className="reveal-card flex flex-col h-full relative group">
-              <div className="w-14 h-14 rounded-xl bg-gradient-cyan-purple flex items-center justify-center mb-6 shadow-glow-primary">
-                <svc.icon className="w-6 h-6 text-white service-icon" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-xl bg-gradient-cyan-purple flex items-center justify-center mb-4 sm:mb-6 shadow-glow-primary">
+                <svc.icon className="w-5 sm:w-6 h-5 sm:h-6 text-white service-icon" />
               </div>
-              <h3 className="text-xl font-bold font-heading mb-3 text-textPrimary">{svc.title}</h3>
-              <p className="text-textSecondary mb-6 flex-grow leading-relaxed font-body">
+              <h3 className="text-lg sm:text-xl font-bold font-heading mb-2 sm:mb-3 text-textPrimary">{svc.title}</h3>
+              <p className="text-textSecondary mb-4 sm:mb-6 flex-grow leading-relaxed font-body text-sm">
                 {svc.description}
               </p>
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                 {svc.tags.map(tag => (
                   <Badge key={tag}>{tag}</Badge>
                 ))}

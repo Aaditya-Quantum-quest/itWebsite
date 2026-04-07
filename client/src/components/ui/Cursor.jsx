@@ -6,7 +6,9 @@ export default function Cursor() {
   const cursorInner = useRef(null);
   
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches || 
+                     'ontouchstart' in window || 
+                     navigator.maxTouchPoints > 0;
     if (isMobile) {
       if(cursorOuter.current) cursorOuter.current.style.display = 'none';
       if(cursorInner.current) cursorInner.current.style.display = 'none';
@@ -16,10 +18,10 @@ export default function Cursor() {
 
     const onMouseMove = (e) => {
       gsap.to(cursorInner.current, { 
-        x: e.clientX, y: e.clientY, duration: 0 
+        x: e.clientX, y: e.clientY, duration: 0.05, ease: "power2.out" 
       });
       gsap.to(cursorOuter.current, { 
-        x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out"
+        x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out"
       });
     };
 
@@ -27,12 +29,12 @@ export default function Cursor() {
     
     const handleMouseEnter = () => {
       gsap.to(cursorOuter.current, { scale: 1.8, opacity: 0.6, 
-        duration: 0.3, backgroundColor: 'rgba(0, 212, 255, 0.2)' });
+        duration: 0.2, ease: "power2.out", backgroundColor: 'rgba(0, 212, 255, 0.2)' });
     };
 
     const handleMouseLeave = () => {
       gsap.to(cursorOuter.current, { scale: 1, opacity: 1, 
-        duration: 0.3, backgroundColor: 'transparent' });
+        duration: 0.2, ease: "power2.out", backgroundColor: 'transparent' });
     };
 
     const addListeners = () => {

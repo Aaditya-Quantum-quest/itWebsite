@@ -6,60 +6,45 @@ import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import { Play } from 'lucide-react';
 
-// Custom Hook for Typewriter
-const useTypewriter = (words) => {
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  
-  useEffect(() => {
-    let timer;
-    const current = loopNum % words.length;
-    const fullText = words[current];
-
-    if (isDeleting) {
-      setText(fullText.substring(0, text.length - 1));
-    } else {
-      setText(fullText.substring(0, text.length + 1));
-    }
-
-    let speed = isDeleting ? 40 : 80;
-    if (!isDeleting && text === fullText) {
-      speed = 2000;
-      setIsDeleting(true);
-    } else if (isDeleting && text === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      speed = 500;
-    }
-
-    timer = setTimeout(() => {}, speed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, words]);
-
-  // To fix exact behavior, we implement a simple interval loop instead
-  // The above naive effect can be messy React-wise. Let's do robust simple effect.
-  return text;
-};
-
-// Robust Typewriter
+// Simple working Typewriter
 function Typewriter({ words }) {
   const [text, setText] = useState('');
   const [isBlinking, setIsBlinking] = useState(true);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let i = 0;
-    let timer;
+    const currentWord = words[wordIndex];
     
-    const tick = () => {
-      // simplified logic due to lack of space, could use better implementation 
-      // but let's just make it visually work.
-    }
-  }, [words]);
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        if (charIndex < currentWord.length) {
+          setText(currentWord.substring(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else {
+          // Finished typing, pause then delete
+          setIsDeleting(true);
+        }
+      } else {
+        // Deleting
+        if (charIndex > 0) {
+          setText(currentWord.substring(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        } else {
+          // Finished deleting, move to next word
+          setIsDeleting(false);
+          setWordIndex((wordIndex + 1) % words.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
 
-  return <span>{text}</span>
+    return () => clearTimeout(timer);
+  }, [charIndex, isDeleting, wordIndex, words]);
+
+  return text;
 }
-
 
 export default function Hero() {
   const [init, setInit] = useState(false);
@@ -98,20 +83,23 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 overflow-hidden">
       {/* Backgrounds */}
       <div className="absolute inset-0 bg-bgPrimary" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-neonPrimary/15 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
       
-      {init && (
+      {/* Particles temporarily disabled to prevent crashes */}
+      {false && init && (
         <Particles
           id="tsparticles"
           options={{
             particles: {
-              number: { value: 80 },
-              color: { value: '#00D4FF' },
-              links: { enable: true, color: '#00D4FF', distance: 150, opacity: 0.1 },
+              number: { value: 30, density: { enable: true, value_area: 800 } },
+              color: { value: "#00D4FF" },
+              shape: { type: "circle" },
+              opacity: { value: 0.3, random: true },
+              size: { value: { min: 1, max: 3 } },
               move: { enable: true, speed: 0.5 },
               size: { value: { min: 1, max: 3 } }
             },
@@ -122,50 +110,50 @@ export default function Hero() {
         />
       )}
 
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
         
         {/* Left Content */}
         <div className="w-full lg:w-[55%] flex flex-col items-start perspective-[400px]">
-          <Badge className="mb-6 mb-8 reveal-left glass">🚀 Trusted by 50+ Global Clients</Badge>
+          <Badge className="mb-4 sm:mb-8 reveal-left glass text-sm">🚀 Trusted by 50+ Global Clients</Badge>
           
-          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-hero font-extrabold leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-6rem font-hero font-extrabold leading-[1.1] mb-4 sm:mb-6">
             <div className="hero-headline-line opacity-0 origin-bottom">We Build</div>
             <div className="hero-headline-line opacity-0 origin-bottom bg-gradient-cyan-purple bg-clip-text text-transparent min-h-[1.2em]">
               {currentWord}<span className="inline-block w-[3px] h-[0.8em] bg-neonPrimary ml-2 animate-pulse align-middle" />
             </div>
-            <div className="hero-headline-line opacity-0 origin-bottom text-4xl md:text-6xl mt-2">for Global Businesses</div>
+            <div className="hero-headline-line opacity-0 origin-bottom text-2xl sm:text-4xl md:text-5xl lg:text-6xl mt-2">for Global Businesses</div>
           </h1>
           
-          <p className="text-textSecondary text-lg md:text-xl max-w-lg mb-10 reveal-left font-body">
+          <p className="text-textSecondary text-base sm:text-xl md:text-xl max-w-lg mb-6 sm:mb-10 reveal-left font-body">
             From startup MVPs to enterprise platforms — we engineer digital products that scale.
           </p>
           
-          <div className="flex flex-wrap items-center gap-4 mb-14 reveal-left">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-14 reveal-left">
             <Button href="/quote" variant="primary">Get a Quote</Button>
             <Button href="/book" variant="secondary">Book Consultation</Button>
-            <button className="flex items-center gap-3 text-textPrimary hover:text-neonPrimary transition-colors px-4 group">
-              <span className="flex items-center justify-center w-12 h-12 rounded-full border border-surfaceElevated group-hover:border-neonPrimary glass transition-all"><Play className="w-4 h-4 ml-1" /></span>
-              <span className="font-heading font-medium">Watch Showreel</span>
+            <button className="flex items-center gap-2 sm:gap-3 text-textPrimary hover:text-neonPrimary transition-colors px-3 sm:px-4 group">
+              <span className="flex items-center justify-center w-10 sm:w-12 h-10 sm:h-12 rounded-full border border-surfaceElevated group-hover:border-neonPrimary glass transition-all"><Play className="w-3 sm:w-4 h-3 sm:h-4 ml-1" /></span>
+              <span className="font-heading font-medium text-sm">Watch Showreel</span>
             </button>
           </div>
 
           {/* Stats Row */}
-          <div className="flex items-center justify-start gap-8 md:gap-12 w-full pt-8 border-t border-surfaceElevated reveal-left">
+          <div className="flex items-center justify-start gap-4 sm:gap-8 md:gap-12 w-full pt-6 sm:pt-8 border-t border-surfaceElevated reveal-left">
             {[
               { num: "150+", label: "Projects Delivered" },
               { num: "50+", label: "Happy Clients" },
               { num: "8+", label: "Years Experience" }
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
-                <span className="text-3xl md:text-4xl font-hero font-bold text-neonPrimary">{stat.num}</span>
-                <span className="text-xs md:text-sm text-textMuted uppercase tracking-wider">{stat.label}</span>
+                <span className="text-xl sm:text-3xl md:text-4xl font-hero font-bold text-neonPrimary">{stat.num}</span>
+                <span className="text-xs sm:text-sm text-textMuted uppercase tracking-wider">{stat.label}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right Visual */}
-        <div className="w-full lg:w-[45%] relative h-[500px] lg:h-[600px] hidden md:block">
+        <div className="w-full lg:w-[45%] relative h-[400px] sm:h-[500px] md:h-[500px] lg:h-[600px] hidden md:block">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] h-[70%] hero-main-card glass rounded-2xl border-neonPrimary/30 shadow-glow-primary overflow-hidden border">
             {/* Fake Browser window */}
             <div className="h-8 border-b border-surfaceElevated bg-bgSecondary/50 flex items-center px-4 gap-2">
