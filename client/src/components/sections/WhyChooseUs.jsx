@@ -15,19 +15,19 @@ export default function WhyChooseUs() {
   return (
     <section className="py-16 sm:py-24 lg:py-32 bg-bgSecondary overflow-hidden relative">
       {/* Decorative text */}
-      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -rotate-90 origin-left text-[20vw] font-hero font-bold tracking-tighter text-white opacity-[0.02] pointer-events-none select-none z-0 whitespace-nowrap">
-        WHY NEXAFORGE
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -rotate-90 origin-left text-[20vw] font-hero font-medium tracking-tighter text-white opacity-[0.02] pointer-events-none select-none z-0 whitespace-nowrap">
+        WHY SKYZEN IT
       </div>
 
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 flex flex-col lg:flex-row gap-8 lg:gap-16 relative z-10">
-        
+
         {/* Left */}
         <div className="w-full lg:w-[40%] flex flex-col items-start reveal-left">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-[1px] bg-neonPrimary/40" />
-            <span className="text-neonPrimary font-mono text-xs uppercase tracking-[0.15em] font-semibold">WHY NEXAFORGE</span>
+            <span className="text-neonPrimary font-mono text-xs uppercase tracking-[0.15em] font-semibold">WHY SKYZEN IT</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-hero font-bold mb-4 sm:mb-6 !leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-hero font-medium mb-4 sm:mb-6 !leading-tight">
             Built Different.<br />
             <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Delivered Better.</span>
           </h2>
@@ -41,7 +41,7 @@ export default function WhyChooseUs() {
         <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8">
           {features.map((item, i) => (
             <div key={i} className="reveal-card relative group p-3 sm:p-4 -m-3 sm:-m-4 rounded-2xl hover:bg-surfaceCard transition-colors">
-              <span className="absolute top-0 right-3 sm:right-4 text-4xl sm:text-5xl font-mono font-bold text-surfaceElevated group-hover:text-neonPrimary/10 transition-colors pointer-events-none">
+              <span className="absolute top-0 right-3 sm:right-4 text-4xl sm:text-5xl font-mono font-medium text-surfaceElevated group-hover:text-neonPrimary/10 transition-colors pointer-events-none">
                 0{i + 1}
               </span>
               <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-neonPrimary/10 flex items-center justify-center mb-3 sm:mb-4 text-neonPrimary">

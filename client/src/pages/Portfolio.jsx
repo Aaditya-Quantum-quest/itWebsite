@@ -25,7 +25,7 @@ export default function Portfolio() {
     setModalProject(proj);
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
-      gsap.fromTo('.portfolio-modal', 
+      gsap.fromTo('.portfolio-modal',
         { opacity: 0, scale: 0.9, y: 50 },
         { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.2)" }
       );
@@ -41,10 +41,10 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-bgPrimary pt-32 pb-24">
+    <div className="flex flex-col bg-bgPrimary pt-20 pb-24">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-hero font-bold mb-6">Our Work Speaks for Itself</h1>
+          <h1 className="text-4xl md:text-6xl font-hero font-medium uppercase mb-6">Our Work Speaks for Itself</h1>
           <p className="text-textSecondary text-lg max-w-2xl mx-auto">Explore our diverse portfolio of successfully delivered digital products across multiple industries.</p>
         </div>
 
@@ -54,11 +54,10 @@ export default function Portfolio() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-full font-heading text-sm transition-all duration-300 ${
-                activeTab === tab 
-                  ? 'bg-gradient-cyan-purple text-textPrimary shadow-glow-primary' 
+              className={`px-6 py-2 rounded-full font-heading text-sm transition-all duration-300 ${activeTab === tab
+                  ? 'bg-gradient-cyan-purple text-textPrimary shadow-glow-primary'
                   : 'bg-transparent border border-surfaceElevated text-textSecondary hover:border-textSecondary'
-              }`}
+                }`}
             >
               {tab}
             </button>
@@ -77,11 +76,11 @@ export default function Portfolio() {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold font-heading mb-2">{proj.title}</h3>
+                <h3 className="text-xl font-medium font-heading mb-2">{proj.title}</h3>
                 <p className="text-textMuted text-sm mb-4 line-clamp-2">{proj.challenge || "A cutting edge scalable architectural solution."}</p>
                 <div className="flex justify-between items-center">
                   <div className="flex gap-2">
-                    {proj.tags.slice(0,2).map(tag => <span key={tag} className="text-xs text-neonPrimary/80 font-mono bg-neonPrimary/10 px-2 py-1 rounded">{tag}</span>)}
+                    {proj.tags.slice(0, 2).map(tag => <span key={tag} className="text-xs text-neonPrimary/80 font-mono bg-neonPrimary/10 px-2 py-1 rounded">{tag}</span>)}
                   </div>
                   <div className="flex gap-2 text-textSecondary">
                     <ExternalLink className="w-4 h-4 hover:text-white" />
@@ -100,7 +99,7 @@ export default function Portfolio() {
       {modalProject && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8">
           <div className="absolute inset-0 bg-bgPrimary/90 backdrop-blur-sm" onClick={closeModal} />
-          
+
           <div className="portfolio-modal relative w-full max-w-5xl max-h-[90vh] bg-surfaceCard rounded-3xl overflow-hidden shadow-2xl border border-neonPrimary/20 flex flex-col">
             <div className="h-16 border-b border-surfaceElevated flex items-center justify-between px-6 bg-bgSecondary">
               <span className="font-heading font-semibold text-lg">{modalProject.title}</span>
@@ -108,7 +107,7 @@ export default function Portfolio() {
                 <X className="w-6 h-6" />
               </button>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
               <div className="w-full aspect-video rounded-xl overflow-hidden mb-10 border border-white/5 shadow-inner" style={{ background: modalProject.img }}>
                 {/* Images slider would go here typically */}
@@ -117,12 +116,12 @@ export default function Portfolio() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <div className="lg:col-span-2 space-y-8">
                   <div>
-                    <h4 className="text-2xl font-heading font-bold mb-4">The Challenge</h4>
+                    <h4 className="text-2xl font-heading font-medium mb-4">The Challenge</h4>
                     <p className="text-textSecondary leading-relaxed">{modalProject.challenge || "Standard project overview and challenges faced during initial planning."}</p>
                   </div>
                   <div className="w-16 h-1 bg-surfaceElevated rounded-full" />
                   <div>
-                    <h4 className="text-2xl font-heading font-bold mb-4">The Solution</h4>
+                    <h4 className="text-2xl font-heading font-medium mb-4">The Solution</h4>
                     <p className="text-textSecondary leading-relaxed">{modalProject.solution || "Implementation details and architectural decisions that led to success."}</p>
                   </div>
                 </div>

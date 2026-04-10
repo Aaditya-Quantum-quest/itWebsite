@@ -3,21 +3,28 @@
 
 @theme {
   --color-bgPrimary: #0A0A0F;
+  --color-bgPrimary-light: #FFFFFF;
   --color-bgSecondary: #0D1117;
+  --color-bgSecondary-light: #F8FAFC;
   --color-surfaceCard: #111827;
+  --color-surfaceCard-light: #FFFFFF;
   --color-surfaceElevated: #1a2035;
+  --color-surfaceElevated-light: #F1F5F9;
   --color-neonPrimary: #00D4FF;
   --color-neonSecondary: #7B61FF;
   --color-neonTertiary: #00FF88;
   --color-textPrimary: #F0F6FF;
+  --color-textPrimary-light: #1E293B;
   --color-textSecondary: #8892A4;
+  --color-textSecondary-light: #64748B;
   --color-textMuted: #4B5563;
+  --color-textMuted-light: #94A3B8;
   --color-error: #FF4C6A;
   --color-success: #00FF88;
 
-  --font-hero: "Syne", sans-serif;
-  --font-heading: "DM Sans", sans-serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-hero: "Quicksand", sans-serif;
+  --font-heading: "Quicksand", sans-serif;
+  --font-body: "Quicksand", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
   --background-image-gradient-cyan-purple: linear-gradient(135deg, #00D4FF, #7B61FF);
@@ -29,15 +36,57 @@
   --drop-shadow-glow: 0 0 10px rgba(0, 212, 255, 0.4);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 @layer base {
   body {
     @apply bg-bgPrimary text-textPrimary font-body overflow-x-hidden;
-    /* Custom Scrollbar */
+    font-size: medium;
+    font-family: 'Quicksand', sans-serif;
     scrollbar-color: #00D4FF #0A0A0F;
     scrollbar-width: thin;
     cursor: none;
-    /* For custom cursor */
+    background-color: #0A0A0F !important;
+    color: #F0F6FF !important;
   }
+
+  .bg-bgPrimary { background-color: #0A0A0F !important; }
+  .bg-bgSecondary { background-color: #0D1117 !important; }
+  .bg-surfaceCard { background-color: #111827 !important; }
+  .bg-surfaceElevated { background-color: #1a2035 !important; }
+  .text-textPrimary { color: #F0F6FF !important; }
+  .text-textSecondary { color: #94A3B8 !important; }
+  .text-textMuted { color: #6B7280 !important; }
+
+  .glass {
+    background-color: rgba(17, 24, 39, 0.8) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .glass-nav {
+    background-color: rgba(10, 10, 15, 0.9) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .border-surfaceElevated { border-color: rgba(0, 0, 0, 0.3) !important; }
+  .border-neonPrimary\/20 { border-color: rgba(0, 212, 255, 0.2) !important; }
+  .border-neonPrimary\/30 { border-color: rgba(0, 212, 255, 0.3) !important; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0A0A0F !important; }
+  ::-webkit-scrollbar-thumb {
+    background: #00D4FF !important;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #00B8E6 !important; }
+
+  .shadow-glow-primary { box-shadow: 0 0 30px rgba(0, 212, 255, 0.15) !important; }
+  .shadow-btn-glow { box-shadow: 0 0 40px rgba(0, 212, 255, 0.4) !important; }
+  .drop-shadow-glow { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.4)) !important; }
+
+
 
   /* Disable custom cursor on mobile and tablet */
   @media (max-width: 1024px), (hover: none) {
@@ -90,21 +139,7 @@
   }
 }
 
-/* Light mode overrides */
-.light body {
-  @apply bg-[#F8FAFC] text-[#0F172A];
-  transition: background 0.4s, color 0.4s;
-}
 
-.light .glass {
-  background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 212, 255, 0.2);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.light .glass-nav {
-  background: rgba(255, 255, 255, 0.9);
-}
 
 /* Mobile-first responsive utilities */
 @layer utilities {

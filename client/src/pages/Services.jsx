@@ -38,6 +38,30 @@ export default function Services() {
       offers: ["Cloud Migration", "Serverless Architecture", "DevOps & CI/CD", "Database Optimization"],
       stack: ["AWS", "Google Cloud", "Docker", "Kubernetes"],
       benefits: ["99.9% Uptime", "Auto-scaling", "Cost Efficiency"]
+    },
+    {
+      title: "UI/UX Design",
+      description: "We create intuitive, engaging, and beautiful product experiences. From wireframes to high-fidelity prototypes, our design process ensures your users are always front and center.",
+      icon: MonitorPlay,
+      offers: ["Wireframing", "Interactive Prototyping", "User Research", "Design Systems"],
+      stack: ["Figma", "Framer", "Adobe CC", "Webflow"],
+      benefits: ["User Centric", "Pixel Perfect", "High Conversion"]
+    },
+    {
+      title: "AI & Automations",
+      description: "Leverage the power of artificial intelligence to optimize your business. We build custom LLM integrations, automated workflows, and intelligent chatbots to scale your operations.",
+      icon: BrainCircuit,
+      offers: ["Custom LLMs", "Workflow Automation", "Smart Chatbots", "Predictive Analytics"],
+      stack: ["Python", "OpenAI API", "LangChain", "TensorFlow"],
+      benefits: ["24/7 Operations", "Data Driven", "Time Saving"]
+    },
+    {
+      title: "Backend & APIs",
+      description: "Robust, scalable, and secure backend architectures to power your applications. We design high-performance REST and GraphQL APIs backed by optimized databases.",
+      icon: Database,
+      offers: ["RESTful APIs", "GraphQL Services", "Database Design", "Microservices"],
+      stack: ["Node.js", "Go", "PostgreSQL", "MongoDB"],
+      benefits: ["Highly Scalable", "Secure Data", "Fast Execution"]
     }
   ];
 
@@ -52,7 +76,7 @@ export default function Services() {
             <span>/</span>
             <span className="text-neonPrimary">Services</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-hero font-bold mb-4">End-to-End Digital Solutions</h1>
+          <h1 className="text-4xl md:text-6xl font-hero font-medium uppercase mb-4">End-to-End Digital Solutions</h1>
           <p className="text-textSecondary max-w-2xl mx-auto text-lg">We bring your boldest ideas to life through rigorous engineering and stunning design.</p>
         </div>
       </section>
@@ -64,7 +88,7 @@ export default function Services() {
             const isEven = idx % 2 === 0;
             return (
               <div key={idx} className={`flex flex-col lg:flex-row gap-16 items-center ${!isEven ? 'lg:flex-row-reverse' : ''} reveal-card`}>
-                
+
                 {/* Visual Side */}
                 <div className="w-full lg:w-1/2 relative group perspective-[800px]">
                   <div className="absolute inset-0 bg-gradient-cyan-purple blur-3xl opacity-20 group-hover:opacity-30 transition-opacity" />
@@ -83,9 +107,9 @@ export default function Services() {
                   <div className="w-16 h-16 rounded-2xl bg-surfaceElevated border border-neonPrimary/20 flex items-center justify-center mb-6 text-neonPrimary">
                     <svc.icon className="w-8 h-8" />
                   </div>
-                  <h2 className="text-3xl lg:text-4xl font-heading font-bold mb-4">{svc.title}</h2>
+                  <h2 className="text-3xl lg:text-4xl font-heading font-medium mb-4">{svc.title}</h2>
                   <p className="text-textSecondary mb-8 text-lg font-body leading-relaxed">{svc.description}</p>
-                  
+
                   <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
                       <h4 className="font-heading font-semibold mb-4 text-white">What We Offer</h4>
@@ -107,8 +131,8 @@ export default function Services() {
                       </div>
                     </div>
                   </div>
-                  
-                  <Button href={`/quote?service=${svc.title.toLowerCase().replace('/','').replace(' ','-')}`} variant="secondary" className="mt-4">
+
+                  <Button href={`/quote?service=${svc.title.toLowerCase().replace('/', '').replace(' ', '-')}`} variant="secondary" className="mt-4">
                     Get a Quote for This Service →
                   </Button>
                 </div>

@@ -15,7 +15,7 @@ export default function StatsCounter() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center divide-x-0 sm:divide-x divide-surfaceElevated relative z-10">
           {stats.map((stat, i) => (
             <div key={i} className="flex flex-col items-center">
-              <span className="text-3xl sm:text-5xl lg:text-7xl font-hero font-extrabold text-transparent bg-clip-text bg-gradient-cyan-purple mb-3">
+              <span className="text-3xl sm:text-5xl lg:text-7xl font-hero font-medium text-transparent bg-clip-text bg-gradient-cyan-purple mb-3">
                 {stat.num}{stat.suffix}
               </span>
               <span className="text-xs sm:text-sm text-textMuted font-body font-medium uppercase tracking-widest">{stat.label}</span>

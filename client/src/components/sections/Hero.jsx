@@ -6,17 +6,17 @@ import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import { Play } from 'lucide-react';
 
-// Simple working Typewriter
+// Working Typewriter Component
 function Typewriter({ words }) {
   const [text, setText] = useState('');
-  const [isBlinking, setIsBlinking] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   useEffect(() => {
     const currentWord = words[wordIndex];
-    
+
     const timer = setTimeout(() => {
       if (!isDeleting) {
         // Typing
@@ -25,7 +25,8 @@ function Typewriter({ words }) {
           setCharIndex(charIndex + 1);
         } else {
           // Finished typing, pause then delete
-          setIsDeleting(true);
+          setIsTypingComplete(true);
+          setTimeout(() => setIsDeleting(true), 1500);
         }
       } else {
         // Deleting
@@ -35,15 +36,21 @@ function Typewriter({ words }) {
         } else {
           // Finished deleting, move to next word
           setIsDeleting(false);
+          setIsTypingComplete(false);
           setWordIndex((wordIndex + 1) % words.length);
         }
       }
-    }, isDeleting ? 50 : 100);
+    }, isDeleting ? 50 : 120);
 
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, wordIndex, words]);
 
-  return text;
+  return (
+    <span>
+      {text}
+      <span className="inline-block w-[3px] h-[0.8em] bg-neonPrimary ml-2 animate-pulse align-middle" />
+    </span>
+  );
 }
 
 export default function Hero() {
@@ -74,21 +81,21 @@ export default function Hero() {
     });
     gsap.to(".floating-badge-1", { y: -10, duration: 2.5, ease: "sine.inOut", repeat: -1, yoyo: true });
     gsap.to(".floating-badge-2", { y: 12, duration: 3, ease: "sine.inOut", repeat: -1, yoyo: true });
-    
+
     // Title reveal
-    gsap.fromTo('.hero-headline-line', 
+    gsap.fromTo('.hero-headline-line',
       { opacity: 0, y: 80, rotateX: -90 },
       { opacity: 1, y: 0, rotateX: 0, stagger: 0.2, duration: 0.8, ease: "back.out(1.7)", delay: 0.5 }
     );
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 sm:pt-20 overflow-hidden">
+    <section className="relative flex items-center pt-8 md:pt-15 overflow-hidden">
       {/* Backgrounds */}
       <div className="absolute inset-0 bg-bgPrimary" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-neonPrimary/15 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-      
+
       {/* Particles temporarily disabled to prevent crashes */}
       {false && init && (
         <Particles
@@ -111,23 +118,21 @@ export default function Hero() {
       )}
 
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-        
+
         {/* Left Content */}
         <div className="w-full lg:w-[55%] flex flex-col items-start perspective-[400px]">
-          <Badge className="mb-4 sm:mb-8 reveal-left glass text-sm">🚀 Trusted by 50+ Global Clients</Badge>
-          
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-6rem font-hero font-extrabold leading-[1.1] mb-4 sm:mb-6">
-            <div className="hero-headline-line opacity-0 origin-bottom">We Build</div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-6rem font-hero font-medium leading-[1.1] mb-4 sm:mb-6">
+            <div className="hero-headline-line opacity-0 origin-bottom text-4xl md:text-5xl">We Build</div>
             <div className="hero-headline-line opacity-0 origin-bottom bg-gradient-cyan-purple bg-clip-text text-transparent min-h-[1.2em]">
-              {currentWord}<span className="inline-block w-[3px] h-[0.8em] bg-neonPrimary ml-2 animate-pulse align-middle" />
+              <Typewriter words={words} />
             </div>
             <div className="hero-headline-line opacity-0 origin-bottom text-2xl sm:text-4xl md:text-5xl lg:text-6xl mt-2">for Global Businesses</div>
           </h1>
-          
+
           <p className="text-textSecondary text-base sm:text-xl md:text-xl max-w-lg mb-6 sm:mb-10 reveal-left font-body">
-            From startup MVPs to enterprise platforms — we engineer digital products that scale.
+            From startup MVPs to enterprise platforms — Skyzen It Services engineers digital products that scale.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-14 reveal-left">
             <Button href="/quote" variant="primary">Get a Quote</Button>
             <Button href="/book" variant="secondary">Book Consultation</Button>
@@ -145,7 +150,7 @@ export default function Hero() {
               { num: "8+", label: "Years Experience" }
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
-                <span className="text-xl sm:text-3xl md:text-4xl font-hero font-bold text-neonPrimary">{stat.num}</span>
+                <span className="text-xl sm:text-3xl md:text-4xl font-hero font-medium text-neonPrimary">{stat.num}</span>
                 <span className="text-xs sm:text-sm text-textMuted uppercase tracking-wider">{stat.label}</span>
               </div>
             ))}
@@ -170,7 +175,7 @@ export default function Hero() {
               <div className="flex-1 rounded-lg bg-surfaceElevated/30 border border-white/5" />
             </div>
           </div>
-          
+
           <div className="absolute top-[15%] right-[5%] floating-badge-1 glass px-4 py-3 rounded-xl flex items-center gap-3 border border-white/10 shadow-lg">
             <span className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500/20 text-blue-400">⚡</span>
             <span className="font-heading font-medium">React.js</span>
@@ -180,11 +185,11 @@ export default function Hero() {
             <span className="w-8 h-8 flex items-center justify-center rounded-full bg-green-500/20 text-green-400">🟢</span>
             <span className="font-heading font-medium">Node.js</span>
           </div>
-          
+
           <div className="absolute top-[25%] left-[0%] floating-badge-1 rotate-12 glass px-3 py-2 rounded-lg border border-neonPrimary/20">
             <span className="text-xs text-neonPrimary font-mono">🔒 Secure</span>
           </div>
-          
+
           <div className="absolute bottom-[30%] right-[0%] floating-badge-2 -rotate-6 glass px-3 py-2 rounded-lg border border-neonSecondary/20">
             <span className="text-xs text-neonSecondary font-mono">99.9% Uptime</span>
           </div>

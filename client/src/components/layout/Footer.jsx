@@ -25,12 +25,12 @@ export default function Footer() {
     <footer className="bg-[#060609] relative pt-16 pb-8 border-t border-transparent" style={{ borderImage: 'linear-gradient(to right, #00D4FF, #7B61FF, transparent) 1' }}>
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-12">
-          
+
           {/* Col 1: Brand & Socials */}
           <div>
             <Link to="/" className="flex items-center gap-2 group mb-6">
               <Hexagon className="w-6 h-6 text-neonPrimary" />
-              <span className="font-hero font-bold text-2xl tracking-wide text-textPrimary">NexaForge</span>
+              <span className="font-hero font-medium text-2xl tracking-wide text-textPrimary">Skyzen It Services</span>
             </Link>
             <p className="text-textSecondary mb-6 font-body text-sm leading-relaxed">
               We engineer digital products that scale. From MVP to enterprise platforms, building the future one line at a time.
@@ -80,14 +80,17 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-neonPrimary mt-0.5" />
                 <div>
                   <p className="text-sm text-textSecondary font-body">Email</p>
-                  <a href="mailto:hello@nexaforge.com" className="text-textPrimary hover:text-neonPrimary text-sm font-medium transition-colors">hello@nexaforge.com</a>
+                  <a href="mailto:hello@skyzenitservices.com" className="text-textPrimary hover:text-neonPrimary text-sm font-medium transition-colors">hello@skyzenitservices.com</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Whatsapp className="w-5 h-5 text-neonPrimary mt-0.5" />
                 <div>
                   <p className="text-sm text-textSecondary font-body">Phone / WhatsApp</p>
-                  <a href="tel:+1234567890" className="text-textPrimary hover:text-neonPrimary text-sm font-medium transition-colors">+1 (234) 567-890</a>
+                  <div className="flex flex-col">
+                    <a href="tel:+919389491488" className="text-textPrimary hover:text-neonPrimary text-sm font-medium transition-colors">+91 93894 91488</a>
+                    <a href="tel:+919411129755" className="text-textPrimary hover:text-neonPrimary text-sm font-medium transition-colors">+91 94111 29755</a>
+                  </div>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -105,7 +108,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-surfaceElevated flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-textMuted text-xs font-body">
-            &copy; {new Date().getFullYear()} NexaForge. All rights reserved.
+            &copy; {new Date().getFullYear()} Skyzen It Services. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs text-textMuted font-body">
             <Link to="/privacy" className="hover:text-textSecondary transition-colors">Privacy Policy</Link>
@@ -116,14 +119,14 @@ export default function Footer() {
 
       {/* Floating Action Buttons */}
       <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
-        <button 
+        <button
           onClick={scrollToTop}
           className="back-to-top opacity-0 scale-80 w-12 h-12 bg-surfaceElevated border border-neonPrimary/30 rounded-full flex items-center justify-center text-neonPrimary hover:bg-neonPrimary/10 hover:shadow-glow-primary transition-all"
         >
           <ArrowUp className="w-5 h-5" />
         </button>
-        <a 
-          href="https://wa.me/1234567890" 
+        <a
+          href="https://wa.me/919389491488"
           target="_blank" rel="noreferrer"
           className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-lg animate-pulse hover:animate-none hover:scale-110 transition-transform relative group"
         >

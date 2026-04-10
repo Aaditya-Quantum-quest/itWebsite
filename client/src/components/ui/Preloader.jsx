@@ -21,21 +21,21 @@ export default function Preloader() {
 
     document.body.style.overflow = "hidden";
 
-    t1.to(letters, { 
-      opacity: 1, y: 0, stagger: 0.05, duration: 0.4 
+    t1.to(letters, {
+      opacity: 1, y: 0, stagger: 0.05, duration: 0.4
     })
-    .to(barRef.current, { 
-      width: "100%", duration: 1.5, ease: "power2.inOut" 
-    }, "-=0.2")
-    .to([topPanelRef.current, bottomPanelRef.current], {
-      y: (i) => i === 0 ? "-100%" : "100%",
-      duration: 0.8, ease: "power4.inOut",
-      onComplete: () => {
-        document.body.style.overflow = "auto";
-        sessionStorage.setItem('preloader_done', 'true');
-        setComplete(true);
-      }
-    }, "+=0.2");
+      .to(barRef.current, {
+        width: "100%", duration: 1.5, ease: "power2.inOut"
+      }, "-=0.2")
+      .to([topPanelRef.current, bottomPanelRef.current], {
+        y: (i) => i === 0 ? "-100%" : "100%",
+        duration: 0.8, ease: "power4.inOut",
+        onComplete: () => {
+          document.body.style.overflow = "auto";
+          sessionStorage.setItem('preloader_done', 'true');
+          setComplete(true);
+        }
+      }, "+=0.2");
 
   }, []);
 
@@ -45,10 +45,10 @@ export default function Preloader() {
     <div ref={containerRef} className="fixed inset-0 z-[9999] flex flex-col items-center justify-center pointer-events-none">
       <div ref={topPanelRef} className="absolute top-0 left-0 w-full h-1/2 bg-bgPrimary pointer-events-auto origin-top" />
       <div ref={bottomPanelRef} className="absolute bottom-0 left-0 w-full h-1/2 bg-bgPrimary pointer-events-auto origin-bottom" />
-      
+
       <div className="relative z-10 flex flex-col items-center">
-        <h1 ref={textRef} className="text-4xl md:text-6xl font-hero font-bold tracking-widest text-textPrimary flex overflow-hidden">
-          {'NexaForge'.split('').map((char, i) => (
+        <h1 ref={textRef} className="text-4xl md:text-6xl font-hero font-medium tracking-widest text-textPrimary flex overflow-hidden">
+          {'Skyzen It Services'.split('').map((char, i) => (
             <span key={i} className="opacity-0 translate-y-8 inline-block drop-shadow-glow">
               {char}
             </span>

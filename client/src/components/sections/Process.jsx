@@ -33,7 +33,7 @@ export default function Process() {
                   <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-full border-2 border-neonPrimary bg-bgPrimary flex items-center justify-center text-2xl sm:text-3xl transition-transform duration-300 group-hover:scale-110 group-hover:shadow-glow-primary">
                     {step.icon}
                   </div>
-                  <div className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-surfaceCard border border-neonPrimary flex items-center justify-center text-xs font-mono font-bold text-neonPrimary">
+                  <div className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-surfaceCard border border-neonPrimary flex items-center justify-center text-xs font-mono font-medium text-neonPrimary">
                     {step.num}
                   </div>
                 </div>

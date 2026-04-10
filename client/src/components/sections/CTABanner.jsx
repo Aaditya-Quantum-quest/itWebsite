@@ -14,7 +14,7 @@ export default function CTABanner() {
           <div className="absolute top-0 left-0 w-full h-full border-[1px] border-white/[0.03] rounded-[40%] scale-150 animate-[spin_40s_linear_infinite] pointer-events-none" />
           <div className="absolute top-0 left-0 w-full h-full border-[1px] border-neonPrimary/[0.05] rounded-[40%] scale-125 animate-[spin_30s_linear_infinite_reverse] pointer-events-none" />
 
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-hero font-bold mb-4 sm:mb-6 text-textPrimary relative z-10">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-hero font-medium mb-4 sm:mb-6 text-textPrimary relative z-10">
             Ready to Build Something <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Amazing?</span>
           </h2>
           <p className="text-base sm:text-lg text-textSecondary font-body mb-6 sm:mb-10 max-w-2xl mx-auto relative z-10">

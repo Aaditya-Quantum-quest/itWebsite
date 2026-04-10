@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,7 +22,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const location = useLocation();
-  const [theme, setTheme] = useState('dark');
   const mainRef = useRef(null);
   const progressBarRef = useRef(null);
 
@@ -53,19 +52,6 @@ function App() {
     };
   }, []);
 
-  // Listen to theme changes
-  useEffect(() => {
-    if (theme === 'light') {
-      document.documentElement.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
-
   // Scroll to top and animate page transitions on route change
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -82,7 +68,7 @@ function App() {
     <>
       <Preloader />
       <Cursor />
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar />
       
       {/* Scroll Progress Bar */}
       <div 

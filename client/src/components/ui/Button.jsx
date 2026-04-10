@@ -40,10 +40,10 @@ export default function Button({ children, variant = 'primary', icon: Icon, clas
   }, [variant]);
 
   const baseStyles = "inline-flex items-center justify-center font-heading rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-95 z-10 relative overflow-hidden";
-  
+
   const variants = {
-    primary: "bg-gradient-cyan-purple py-4 px-8 text-white font-semibold shadow-glow-primary hover:brightness-110",
-    secondary: "bg-transparent border-[1.5px] border-neonPrimary py-4 px-8 text-neonPrimary font-medium hover:bg-neonPrimary/10 hover:shadow-glow-primary",
+    primary: "bg-gradient-cyan-purple py-4 px-8 text-white text-sm md:text-md font-medium shadow-glow-primary hover:brightness-110",
+    secondary: "bg-transparent border-[1.5px] border-neonPrimary text-sm md:text-md py-4 px-8 text-neonPrimary font-medium hover:bg-neonPrimary/10 hover:shadow-glow-primary",
     ghost: "bg-transparent text-textSecondary font-medium py-2 hover:text-neonPrimary relative group",
     icon: "p-3 rounded-full border border-surfaceElevated hover:border-neonPrimary hover:text-neonPrimary bg-surfaceCard"
   };

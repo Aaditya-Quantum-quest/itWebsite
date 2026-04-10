@@ -15,12 +15,12 @@ export default function Home() {
   useEffect(() => {
     // Prevent multiple initializations
     if (isInitialized.current) return;
-    
+
     try {
       // Temporarily disabled animations to prevent crashes
       console.log('Home component mounted - animations disabled temporarily');
       isInitialized.current = true;
-      
+
       return () => {
         // Clean up ScrollTriggers on unmount
         if (typeof window !== 'undefined' && window.gsap) {
@@ -55,12 +55,12 @@ function TrustedBy() {
     <section className="h-[100px] bg-bgSecondary flex flex-col justify-center overflow-hidden border-t border-b border-surfaceElevated relative">
       <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-bgSecondary to-transparent z-10" />
       <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-bgSecondary to-transparent z-10" />
-      
+
       <p className="text-center text-textMuted text-xs font-mono tracking-widest mb-3 relative z-20">TRUSTED BY GLOBAL COMPANIES</p>
-      
+
       <div className="flex space-x-12 animate-marquee whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity">
         {[...logos, ...logos, ...logos].map((logo, i) => (
-          <span key={i} className="text-xl font-hero font-bold tracking-wider text-textSecondary grayscale hover:grayscale-0 hover:text-white transition-all cursor-default">
+          <span key={i} className="text-xl font-hero font-medium tracking-wider text-textSecondary grayscale hover:grayscale-0 hover:text-white transition-all cursor-default">
             {logo}
           </span>
         ))}
