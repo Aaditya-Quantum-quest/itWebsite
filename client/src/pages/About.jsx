@@ -114,7 +114,7 @@ export default function About() {
       </section>
 
       {/* Team */}
-      <section className="py-24 container mx-auto px-4 md:px-8 lg:px-16">
+      {/* <section className="py-24 container mx-auto px-4 md:px-8 lg:px-16">
         <SectionHeader label="The Minds Behind It" title="Meet Leadership" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {team.map((member, i) => (
@@ -128,7 +128,7 @@ export default function About() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <CTABanner />
     </div>

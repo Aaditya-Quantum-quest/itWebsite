@@ -62,7 +62,7 @@ export default function Footer() {
           <div>
             <h4 className="text-textPrimary font-heading font-semibold text-lg mb-6">Company</h4>
             <ul className="flex flex-col gap-3">
-              {['About Us', 'Portfolio', 'Careers', 'Blog', 'Contact'].map((item) => (
+              {['Home', 'Services', 'About', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-textSecondary hover:text-neonPrimary transition-colors text-sm font-body">
                     {item}
@@ -97,7 +97,7 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-neonPrimary mt-0.5" />
                 <div>
                   <p className="text-sm text-textSecondary font-body">Location</p>
-                  <p className="text-textPrimary text-sm font-medium">Remote-first, Global Hub</p>
+                  <p className="text-textPrimary text-sm font-medium">Noida Sector 59, Uttar Pradesh, India</p>
                 </div>
               </li>
             </ul>
