@@ -82,7 +82,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-lg font-heading font-semibold mb-1 text-white">Headquarters</h4>
-                <p className="text-textSecondary text-sm">Remote-first global hub. Operations based out of India & US.</p>
+                <p className="text-textSecondary text-sm">Noida Sector 59, India</p>
               </div>
             </div>
           </div>
@@ -144,13 +144,14 @@ export default function Contact() {
       </div>
 
       {/* Embedded Map Visual */}
-      <div className="w-full h-[400px] mt-10 bg-bgSecondary border-y border-surfaceElevated relative overflow-hidden flex items-center justify-center">
-        <div className="text-center">
-          <MapPin className="w-12 h-12 text-neonPrimary/40 mx-auto mb-4" />
-          <p className="font-mono text-textMuted tracking-widest text-sm">GLOBAL AVAILABILITY</p>
-        </div>
-        {/* Simulate a dark styled map background */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMGQwZDE1Ij48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMzMzMiPjwvcmVjdD4KPC9zdmc+')] opacity-20 pointer-events-none" />
+      <div className="w-full h-[400px] mt-10 bg-bgSecondary border-y border-surfaceElevated relative overflow-hidden flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3502.7646554380194!2d77.37281417549988!3d28.60683627567864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDM2JzI0LjYiTiA3N8KwMjInMzEuNCJF!5e0!3m2!1sen!2sin!4v1775840842123!5m2!1sen!2sin" 
+          className="w-full h-full border-0"
+          allowFullScreen="" 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
     </div>
   );
