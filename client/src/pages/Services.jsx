@@ -68,7 +68,7 @@ export default function Services() {
   return (
     <div className="flex flex-col">
       {/* Hero Subsection */}
-      <section className="h-[50vh] min-h-[400px] flex items-center bg-bgSecondary border-b border-surfaceElevated relative overflow-hidden">
+      <section className=" min-h-[350px] md:min-h-[400px] md:h-[40vh] flex items-center bg-bgSecondary border-b border-surfaceElevated relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-cyan-purple opacity-[0.03]" />
         <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10 text-center">
           <div className="text-sm font-mono text-textMuted mb-6 space-x-2">
@@ -76,7 +76,7 @@ export default function Services() {
             <span>/</span>
             <span className="text-neonPrimary">Services</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-hero font-medium uppercase mb-4">End-to-End Digital Solutions</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-hero font-medium uppercase mb-4">End to End Digital Solutions</h1>
           <p className="text-textSecondary max-w-2xl mx-auto text-lg">We bring your boldest ideas to life through rigorous engineering and stunning design.</p>
         </div>
       </section>

@@ -4,7 +4,10 @@ import gsap from 'gsap';
 export default function Cursor() {
   const cursorOuter = useRef(null);
   const cursorInner = useRef(null);
-  
+  const tails = useRef([]);
+  const tailCount = 20;
+  const tailElements = Array.from({ length: tailCount });
+
   useEffect(() => {
     const isMobile = window.matchMedia("(max-width: 1024px)").matches || 
                      'ontouchstart' in window || 
@@ -12,6 +15,7 @@ export default function Cursor() {
     if (isMobile) {
       if(cursorOuter.current) cursorOuter.current.style.display = 'none';
       if(cursorInner.current) cursorInner.current.style.display = 'none';
+      tails.current.forEach(t => { if(t) t.style.display = 'none'; });
       document.body.style.cursor = 'auto';
       return;
     }
@@ -22,6 +26,16 @@ export default function Cursor() {
       });
       gsap.to(cursorOuter.current, { 
         x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out"
+      });
+      tails.current.forEach((tail, index) => {
+        if (tail) {
+          gsap.to(tail, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.15 + (index * 0.06), // increased delay step for a longer stretching effect
+            ease: "power2.out"
+          });
+        }
       });
     };
 
@@ -72,6 +86,18 @@ export default function Cursor() {
         ref={cursorInner}
         className="fixed top-0 left-0 w-1.5 h-1.5 bg-neonPrimary rounded-full pointer-events-none z-[9999] transform -translate-x-1/2 -translate-y-1/2"
       />
+      {tailElements.map((_, index) => (
+        <div 
+          key={index}
+          ref={(el) => (tails.current[index] = el)}
+          className="fixed top-0 left-0 bg-neonPrimary rounded-full pointer-events-none z-[9998] transform -translate-x-1/2 -translate-y-1/2"
+          style={{
+            width: `${6 - (index * 0.25)}px`,
+            height: `${6 - (index * 0.25)}px`,
+            opacity: 0.8 - (index * 0.04)
+          }}
+        />
+      ))}
     </>
   );
 }

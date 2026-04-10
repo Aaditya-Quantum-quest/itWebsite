@@ -25,12 +25,19 @@ export default function About() {
 
   return (
     <div className="flex flex-col bg-bgPrimary">
-      {/* Hero */}
-      <section className="py-20 text-center container mx-auto px-4 reveal-heading">
-        <h1 className="text-4xl md:text-6xl font-hero font-medium uppercase mb-6">Built by Builders.<br />Driven by <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Impact.</span></h1>
-        <p className="text-textSecondary text-lg max-w-3xl mx-auto leading-relaxed">
-          Skyzen It Services is a collective of engineers, designers, and strategists. We believe in writing clean code, designing intuitive interfaces, and solving hard problems that hold innovation back.
-        </p>
+      <section className=" min-h-[350px] md:min-h-[400px] md:h-[40vh] flex items-center bg-bgSecondary border-b border-surfaceElevated relative overflow-hidden reveal-heading">
+        <div className="absolute inset-0 bg-gradient-cyan-purple opacity-[0.03]" />
+        <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10 text-center mt-12 md:mt-0">
+          <div className="text-sm font-mono text-textMuted mb-6 space-x-2">
+            <span className="hover:text-neonPrimary cursor-pointer transition-colors">Home</span>
+            <span>/</span>
+            <span className="text-neonPrimary">About Us</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-hero font-medium uppercase mb-4">Built by Builders.<br />Driven by <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Impact.</span></h1>
+          <p className="text-textSecondary max-w-2xl mx-auto text-lg leading-relaxed">
+            Skyzen It Services is a collective of engineers, designers, and strategists. We believe in writing clean code, designing intuitive interfaces, and solving hard problems that hold innovation back.
+          </p>
+        </div>
       </section>
 
       {/* Mission & Vision */}

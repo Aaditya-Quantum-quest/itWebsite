@@ -41,12 +41,21 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="flex flex-col bg-bgPrimary pt-20 pb-24">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-hero font-medium uppercase mb-6">Our Work Speaks for Itself</h1>
-          <p className="text-textSecondary text-lg max-w-2xl mx-auto">Explore our diverse portfolio of successfully delivered digital products across multiple industries.</p>
+    <div className="flex flex-col bg-bgPrimary pb-24">
+      <section className=" min-h-[350px] md:min-h-[400px] md:h-[40vh] flex items-center bg-bgSecondary border-b border-surfaceElevated relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-cyan-purple opacity-[0.03]" />
+        <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10 text-center mt-20 md:mt-0">
+          <div className="text-sm font-mono text-textMuted mb-6 space-x-2">
+            <span className="hover:text-neonPrimary cursor-pointer transition-colors">Home</span>
+            <span>/</span>
+            <span className="text-neonPrimary">Portfolio</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-hero font-medium uppercase mb-4">Our Work Speaks for Itself</h1>
+          <p className="text-textSecondary max-w-2xl mx-auto text-lg">Explore our diverse portfolio of successfully delivered digital products across multiple industries.</p>
         </div>
+      </section>
+
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 mt-16">
 
         {/* Filter Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-16">

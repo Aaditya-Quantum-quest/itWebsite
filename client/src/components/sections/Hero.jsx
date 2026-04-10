@@ -121,12 +121,12 @@ export default function Hero() {
 
         {/* Left Content */}
         <div className="w-full lg:w-[55%] flex flex-col items-start perspective-[400px]">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-6rem font-hero font-medium leading-[1.1] mb-4 sm:mb-6">
-            <div className="hero-headline-line opacity-0 origin-bottom text-4xl md:text-5xl">We Build</div>
+          <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-6rem font-hero font-medium leading-[1.1] mb-4 sm:mb-6">
+            <div className="hero-headline-line opacity-0 origin-bottom text-4xl sm:text-5xl uppercase">We Build</div>
             <div className="hero-headline-line opacity-0 origin-bottom bg-gradient-cyan-purple bg-clip-text text-transparent min-h-[1.2em]">
               <Typewriter words={words} />
             </div>
-            <div className="hero-headline-line opacity-0 origin-bottom text-2xl sm:text-4xl md:text-5xl lg:text-6xl mt-2">for Global Businesses</div>
+            <div className="hero-headline-line opacity-0 origin-bottom text-4xl sm:text-4xl md:text-5xl lg:text-6xl mt-2">for Global Businesses</div>
           </h1>
 
           <p className="text-textSecondary text-base sm:text-xl md:text-xl max-w-lg mb-6 sm:mb-10 reveal-left font-body">

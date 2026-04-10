@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-24 bg-bgPrimary flex flex-col relative overflow-hidden">
+    <div className="min-h-screen pt-10 md:pt-15 lg:pt-20 pb-24 bg-bgPrimary flex flex-col relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-cyan-purple opacity-[0.03] blur-[150px] rounded-full" />
 
       <div className="container mx-auto px-4 md:px-8 lg:px-16 flex flex-col lg:flex-row gap-16 relative z-10 w-full mb-20">
@@ -47,7 +47,7 @@ export default function Contact() {
             label="Contact Us"
             title="Let's Start a Conversation."
             subtitle="Whether you have a question about services, pricing, or our team, we're ready to answer."
-            className="!items-start !text-left"
+            className="lg:!items-start lg:!text-left"
           />
 
           <div className="grid grid-cols-1 gap-6 mt-8">
