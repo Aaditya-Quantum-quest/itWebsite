@@ -83,7 +83,7 @@ export default function Navbar() {
     <>
       <header
         ref={navbarRef}
-        className="fixed top-0 w-full z-50 h-16 md:h-[72px] flex items-center transition-colors duration-300 glass-nav border-b border-transparent"
+        className="fixed top-0 w-full z-50 h-20 md:h-24 lg:h-[72px] flex items-center transition-colors duration-300 glass-nav border-b border-transparent"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
