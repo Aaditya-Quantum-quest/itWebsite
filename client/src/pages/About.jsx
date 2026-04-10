@@ -33,9 +33,12 @@ export default function About() {
             <span>/</span>
             <span className="text-neonPrimary">About Us</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-hero font-medium uppercase mb-4">Built by Builders.<br />Driven by <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Impact.</span></h1>
-          <p className="text-textSecondary max-w-2xl mx-auto text-lg leading-relaxed">
-            Skyzen It Services is a collective of engineers, designers, and strategists. We believe in writing clean code, designing intuitive interfaces, and solving hard problems that hold innovation back.
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-hero font-medium uppercase mb-4">
+            Built by Builders.<br />Driven by <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Impact.</span>
+          </h1>
+
+          <p className="text-textSecondary max-w-xl mx-auto text-base leading-relaxed">
+            Skyzen IT Services builds clean, intuitive solutions to solve real problems.
           </p>
         </div>
       </section>
