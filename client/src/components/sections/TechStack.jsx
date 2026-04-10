@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionHeader from '../ui/SectionHeader';
 
 export default function TechStack() {
   const row1 = ['React', 'Next.js', 'Vue.js', 'Angular', 'Tailwind', 'TypeScript', 'Svelte', 'GSAP'];
@@ -15,11 +16,13 @@ export default function TechStack() {
     </div>
   );
 
-  return (  
-    <section className="py-16 sm:py-24 bg-bgSecondary overflow-hidden relative border-t border-b border-surfaceElevated relative">
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 mb-12 text-center reveal-heading relative z-20">
-        <span className="text-neonPrimary font-mono text-xs uppercase tracking-[0.15em] font-semibold block mb-3">TECHNOLOGIES WE MASTER</span>
-        <h3 className="text-2xl sm:text-3xl font-hero font-medium uppercase">Cutting-edge tools for cutting-edge solutions</h3>
+  return (
+    <section className="py-16 sm:py-12 bg-bgSecondary overflow-hidden relative border-t border-b border-surfaceElevated relative">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 relative z-20">
+        <SectionHeader
+          label="Technologies We Master"
+          title="Tools That Drive Innovation"
+        />
       </div>
 
       <div className="relative w-full flex flex-col gap-6">

@@ -50,6 +50,12 @@
     color: #F0F6FF !important;
   }
 
+  @media (min-width: 1025px) and (hover: hover) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
   .bg-bgPrimary { background-color: #0A0A0F !important; }
   .bg-bgSecondary { background-color: #0D1117 !important; }
   .bg-surfaceCard { background-color: #111827 !important; }

@@ -3,28 +3,23 @@ import gsap from 'gsap';
 
 export default function Cursor() {
   const cursorOuter = useRef(null);
-  const cursorInner = useRef(null);
   const tails = useRef([]);
   const tailCount = 20;
   const tailElements = Array.from({ length: tailCount });
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 1024px)").matches || 
-                     'ontouchstart' in window || 
-                     navigator.maxTouchPoints > 0;
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0;
     if (isMobile) {
-      if(cursorOuter.current) cursorOuter.current.style.display = 'none';
-      if(cursorInner.current) cursorInner.current.style.display = 'none';
-      tails.current.forEach(t => { if(t) t.style.display = 'none'; });
+      if (cursorOuter.current) cursorOuter.current.style.display = 'none';
+      tails.current.forEach(t => { if (t) t.style.display = 'none'; });
       document.body.style.cursor = 'auto';
       return;
     }
 
     const onMouseMove = (e) => {
-      gsap.to(cursorInner.current, { 
-        x: e.clientX, y: e.clientY, duration: 0.05, ease: "power2.out" 
-      });
-      gsap.to(cursorOuter.current, { 
+      gsap.to(cursorOuter.current, {
         x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out"
       });
       tails.current.forEach((tail, index) => {
@@ -32,7 +27,7 @@ export default function Cursor() {
           gsap.to(tail, {
             x: e.clientX,
             y: e.clientY,
-            duration: 0.15 + (index * 0.06), // increased delay step for a longer stretching effect
+            duration: 0.08 + (index * 0.04),
             ease: "power2.out"
           });
         }
@@ -40,15 +35,19 @@ export default function Cursor() {
     };
 
     window.addEventListener('mousemove', onMouseMove);
-    
+
     const handleMouseEnter = () => {
-      gsap.to(cursorOuter.current, { scale: 1.8, opacity: 0.6, 
-        duration: 0.2, ease: "power2.out", backgroundColor: 'rgba(0, 212, 255, 0.2)' });
+      gsap.to(cursorOuter.current, {
+        scale: 1.8, opacity: 0.6,
+        duration: 0.2, ease: "power2.out", backgroundColor: 'rgba(0, 212, 255, 0.2)'
+      });
     };
 
     const handleMouseLeave = () => {
-      gsap.to(cursorOuter.current, { scale: 1, opacity: 1, 
-        duration: 0.2, ease: "power2.out", backgroundColor: 'transparent' });
+      gsap.to(cursorOuter.current, {
+        scale: 1, opacity: 1,
+        duration: 0.2, ease: "power2.out", backgroundColor: 'transparent'
+      });
     };
 
     const addListeners = () => {
@@ -61,7 +60,6 @@ export default function Cursor() {
 
     addListeners();
 
-    // Re-add on DOM changes ideally, but for now this works initially
     const observer = new MutationObserver(addListeners);
     observer.observe(document.body, { childList: true, subtree: true });
 
@@ -78,23 +76,19 @@ export default function Cursor() {
 
   return (
     <>
-      <div 
+      <div
         ref={cursorOuter}
         className="fixed top-0 left-0 w-8 h-8 rounded-full border border-neonPrimary pointer-events-none z-[9999] transform -translate-x-1/2 -translate-y-1/2"
       />
-      <div 
-        ref={cursorInner}
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-neonPrimary rounded-full pointer-events-none z-[9999] transform -translate-x-1/2 -translate-y-1/2"
-      />
       {tailElements.map((_, index) => (
-        <div 
+        <div
           key={index}
           ref={(el) => (tails.current[index] = el)}
           className="fixed top-0 left-0 bg-neonPrimary rounded-full pointer-events-none z-[9998] transform -translate-x-1/2 -translate-y-1/2"
           style={{
-            width: `${6 - (index * 0.25)}px`,
-            height: `${6 - (index * 0.25)}px`,
-            opacity: 0.8 - (index * 0.04)
+            width: `${4 - (index * 0.15)}px`,
+            height: `${4 - (index * 0.15)}px`,
+            opacity: 0.6 - (index * 0.03)
           }}
         />
       ))}

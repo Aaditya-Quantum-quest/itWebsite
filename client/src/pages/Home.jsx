@@ -38,7 +38,7 @@ export default function Home() {
       {/* <TrustedBy /> */}
       <ServicesOverview />
       <WhyChooseUs />
-      <PortfolioPreview />
+      {/* <PortfolioPreview /> */}
       <TechStack />
       <Process />
       {/* Testimonials */}
