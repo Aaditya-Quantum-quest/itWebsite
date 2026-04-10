@@ -22,19 +22,20 @@ export default function WhyChooseUs() {
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 flex flex-col lg:flex-row gap-8 lg:gap-16 relative z-10">
 
         {/* Left */}
-        <div className="w-full lg:w-[40%] flex flex-col items-start reveal-left">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-10 h-[1px] bg-neonPrimary/40" />
-            <span className="text-neonPrimary font-mono text-xs uppercase tracking-[0.15em] font-semibold">WHY SKYZEN IT</span>
+        <div className="w-full lg:w-[40%] flex flex-col items-center lg:items-start text-center lg:text-left reveal-left">
+          <div className="flex items-center justify-center lg:justify-start gap-4 mb-4 w-full">
+            <div className="w-10 h-[1px] bg-neonPrimary/40 hidden sm:block lg:block" />
+            <span className="text-neonPrimary font-mono text-sm uppercase tracking-[0.15em] font-semibold">WHY SKYZEN IT</span>
+            <div className="w-10 h-[1px] bg-neonPrimary/40 lg:hidden" />
           </div>
-          <h2 className="text-3xl sm:text-5xl font-hero font-medium mb-4 sm:mb-6 !leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-hero font-medium mb-4 sm:mb-6 !leading-tight uppercase">
             Built Different.<br />
             <span className="text-transparent bg-clip-text bg-gradient-cyan-purple">Delivered Better.</span>
           </h2>
-          <p className="text-textSecondary mb-6 sm:mb-8 text-base sm:text-lg font-body leading-relaxed">
+          <p className="text-textSecondary mb-6 sm:mb-8 text-base sm:text-lg font-body leading-relaxed max-w-lg lg:max-w-none">
             We don't just write code. We partner with you to solve complex business problems, mitigate risks, and build platforms that drive actual revenue growth.
           </p>
-          <Button href="/about" variant="secondary">Our Story</Button>
+          <Button className="sm:hidden lg:block" href="/about" variant="secondary">Our Story</Button>
         </div>
 
         {/* Right Grid */}

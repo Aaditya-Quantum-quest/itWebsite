@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Hexagon, Menu, X } from 'lucide-react';
+import { Hexagon, Menu, X, ArrowUpRight } from 'lucide-react';
 
 export default function Navbar() {
   const navbarRef = useRef(null);
+  const drawerRef = useRef(null);
+  const overlayRef = useRef(null);
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -42,27 +44,39 @@ export default function Navbar() {
     };
   }, []);
 
-  // Mobile Menu Animations
   useEffect(() => {
+    const drawer = drawerRef.current;
+    const overlay = overlayRef.current;
+
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      gsap.to(".mobile-overlay", { x: "0%", duration: 0.5, ease: "power3.inOut" });
-      gsap.fromTo(".mobile-nav-link",
-        { x: -40, opacity: 0 },
-        { x: 0, opacity: 1, stagger: 0.08, delay: 0.2 }
+      // fade in backdrop
+      gsap.to(overlay, { opacity: 1, duration: 0.3, ease: "power2.out", pointerEvents: 'auto' });
+      // slide drawer in from right
+      gsap.to(drawer, { x: '0%', duration: 0.45, ease: "power3.out" });
+      // stagger nav links
+      gsap.fromTo(".m-nav-item",
+        { x: 30, opacity: 0 },
+        { x: 0, opacity: 1, stagger: 0.07, delay: 0.2, ease: "power2.out" }
+      );
+      gsap.fromTo(".m-nav-footer",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, delay: 0.45, duration: 0.4, ease: "power2.out" }
       );
     } else {
       document.body.style.overflow = 'auto';
-      gsap.to(".mobile-overlay", { x: "100%", duration: 0.5, ease: "power3.inOut" });
+      gsap.to(overlay, { opacity: 0, duration: 0.3, ease: "power2.in", pointerEvents: 'none' });
+      gsap.to(drawer, { x: '100%', duration: 0.4, ease: "power3.in" });
     }
   }, [mobileMenuOpen]);
+
+  const closeMenu = () => setMobileMenuOpen(false);
 
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    // { name: 'Portfolio', path: '/portfolio' },
     { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (
@@ -71,20 +85,19 @@ export default function Navbar() {
         ref={navbarRef}
         className="fixed top-0 w-full z-50 h-16 md:h-[72px] flex items-center transition-colors duration-300 glass-nav border-b border-transparent"
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 flex items-center justify-between">
-
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <Hexagon className="w-6 h-6 text-neonPrimary group-hover:rotate-90 transition-transform duration-500" />
-            <span className="font-hero font-medium text-lg xs:text-xl sm:text-xl md:text-2xl tracking-wide">Skyzen It Services</span>
+            <span className="font-hero font-medium text-xl tracking-wide">Skyzen It Services</span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-sm lg:text-base xl:text-base font-medium relative overflow-hidden group ${location.pathname === link.path ? 'text-neonPrimary' : 'text-textPrimary hover:text-textSecondary'}`}
+                className={`text-sm font-medium relative overflow-hidden group ${location.pathname === link.path ? 'text-neonPrimary' : 'text-textPrimary hover:text-textSecondary'}`}
               >
                 {link.name}
                 <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-neonPrimary transform ${location.pathname === link.path ? 'translate-x-0' : '-translate-x-[101%] group-hover:translate-x-0'} transition-transform duration-300 ease-out`} />
@@ -92,52 +105,98 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
-            <Link to="/quote" className="px-3 sm:px-4 py-2 rounded-full text-sm font-semibold border-1.5 border-neonPrimary text-neonPrimary hover:bg-neonPrimary/10 transition-colors drop-shadow-glow">
+          <div className="hidden lg:flex items-center gap-4">
+            <Link to="/quote" className="px-4 py-2 rounded-full text-sm font-semibold border border-neonPrimary text-neonPrimary hover:bg-neonPrimary/10 transition-colors">
               Get a Quote
             </Link>
-            <Link to="/book" className="px-3 sm:px-4 py-2 rounded-full text-sm font-semibold bg-gradient-cyan-purple text-textPrimary hover:shadow-btn-glow hover:scale-105 transition-all">
+            <Link to="/book" className="px-4 py-2 rounded-full text-sm font-semibold bg-gradient-cyan-purple text-textPrimary hover:scale-105 transition-all">
               Book Consultation
             </Link>
           </div>
 
           {/* Mobile Toggle */}
-          <button className="lg:hidden p-2" onClick={() => setMobileMenuOpen(true)}>
+          <button
+            className="lg:hidden p-2 rounded-lg text-textPrimary hover:text-neonPrimary transition-colors"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
             <Menu className="w-6 h-6" />
           </button>
         </div>
       </header>
 
-      {/* Mobile Overlay */}
-      <div className="mobile-overlay fixed inset-0 z-[60] bg-bgSecondary/95 backdrop-blur-xl translate-x-full pr-4 flex flex-col justify-center items-center shadow-2xl">
-        <div className="noise-texture"></div>
-        <button
-          className="absolute top-6 right-6 p-2 z-50 text-textPrimary"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          <X className="w-8 h-8" />
-        </button>
+      {/* Backdrop */}
+      <div
+        ref={overlayRef}
+        onClick={closeMenu}
+        className="lg:hidden fixed inset-0 z-[60] bg-black/60"
+        style={{ opacity: 0, pointerEvents: 'none' }}
+      />
 
-        <nav className="flex flex-col items-center gap-4 sm:gap-6 relative z-50">
-          {navLinks.map((link) => (
+      {/* Drawer */}
+      <div
+        ref={drawerRef}
+        className="lg:hidden fixed top-0 right-0 h-full w-[80vw] max-w-xs z-[70] bg-black flex flex-col"
+        style={{ transform: 'translateX(100%)' }}
+      >
+        {/* Cyan accent line at top */}
+        <div className="h-[3px] w-full bg-neonPrimary" />
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+          <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
+            <Hexagon className="w-5 h-5 text-neonPrimary" />
+            <span className="font-hero font-medium text-base tracking-wide text-white">Skyzen</span>
+          </Link>
+          <button
+            onClick={closeMenu}
+            className="w-8 h-8 flex items-center justify-center rounded-full border border-white/20 text-white hover:border-neonPrimary hover:text-neonPrimary transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Nav Links */}
+        <nav className="flex flex-col flex-1 px-6 pt-8 gap-1">
+          {navLinks.map((link, index) => (
             <Link
               key={link.name}
               to={link.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className="mobile-nav-link text-2xl sm:text-3xl font-heading font-medium"
+              onClick={closeMenu}
+              className={`m-nav-item flex items-center justify-between py-4 border-b border-white/8 group ${location.pathname === link.path ? 'text-neonPrimary' : 'text-white/80 hover:text-white'}`}
             >
-              {link.name}
+              <div className="flex items-center gap-4">
+                <span className="text-xs font-mono text-white/25 w-5">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="text-lg font-medium tracking-wide">{link.name}</span>
+              </div>
+              <ArrowUpRight
+                className={`w-4 h-4 opacity-0 group-hover:opacity-100 transition-all duration-200 ${location.pathname === link.path ? 'opacity-100 text-neonPrimary' : 'text-white/50'}`}
+              />
             </Link>
           ))}
-          <div className="flex flex-col gap-3 sm:gap-4 mt-6 sm:mt-8 w-full max-w-xs mobile-nav-link">
-            <Link to="/quote" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl border border-neonPrimary text-neonPrimary text-sm">
-              Get a Quote
-            </Link>
-            <Link to="/book" onClick={() => setMobileMenuOpen(false)} className="w-full text-center px-4 sm:px-6 py-3 rounded-xl bg-gradient-cyan-purple text-white text-sm">
-              Book Consultation
-            </Link>
-          </div>
         </nav>
+
+        {/* Footer CTAs */}
+        <div className="m-nav-footer px-6 pb-8 pt-6 flex flex-col gap-3 border-t border-white/10">
+          <Link
+            to="/quote"
+            onClick={closeMenu}
+            className="w-full text-center py-3 rounded-xl border border-neonPrimary text-neonPrimary text-sm font-semibold hover:bg-neonPrimary/10 transition-colors"
+          >
+            Get a Quote
+          </Link>
+          <Link
+            to="/book"
+            onClick={closeMenu}
+            className="w-full text-center py-3 rounded-xl bg-gradient-cyan-purple text-white text-sm font-semibold hover:scale-[1.02] transition-transform"
+          >
+            Book Consultation
+          </Link>
+          <p className="text-center text-xs text-white/25 mt-2 tracking-wider uppercase">Skyzen It Services</p>
+        </div>
       </div>
     </>
   );
